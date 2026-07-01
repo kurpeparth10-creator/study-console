@@ -186,6 +186,11 @@
   }
   .add-row-btn:hover{border-color:var(--amber);color:var(--amber);}
 
+  .empty-hint{
+    padding:28px 20px;text-align:center;color:var(--text-dim);font-size:13px;line-height:1.6;
+  }
+  .empty-hint strong{color:var(--amber);font-weight:600;}
+
   .target-row-edit{
     display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;
     padding:2px 0;
@@ -386,7 +391,7 @@
         <div class="card-head">
           <div class="t">Daily Schedule</div>
           <div style="display:flex;align-items:center;gap:12px;">
-            <div class="sm" id="schedCount">0 / 17</div>
+            <div class="sm" id="schedCount">0 / 0</div>
             <button class="edit-toggle" id="editSchedBtn">Edit</button>
           </div>
         </div>
@@ -490,33 +495,8 @@
 
 <script>
 (function(){
-  const DEFAULT_SCHEDULE = [
-    {id:'s1', time:'6:00 AM', task:'Wake up, water, freshen up'},
-    {id:'s2', time:'6:15–6:45', task:'Walk + Stretching'},
-    {id:'s3', time:'6:45–7:15', task:'Breakfast'},
-    {id:'s4', time:'7:15–9:15', task:'GATE Lecture (Subject 1)', bold:true},
-    {id:'s5', time:'9:15–9:30', task:'Break'},
-    {id:'s6', time:'9:30–11:00', task:'Notes + Solve lecture questions'},
-    {id:'s7', time:'11:00–12:30', task:'Previous Year Questions'},
-    {id:'s8', time:'12:30–1:15', task:'Lunch'},
-    {id:'s9', time:'1:15–2:00', task:'Power Nap / Relax'},
-    {id:'s10', time:'2:00–4:00', task:'Second Study Session (DSA/Java)', bold:true},
-    {id:'s11', time:'4:00–4:30', task:'Tea Break'},
-    {id:'s12', time:'4:30–5:30', task:'LeetCode (1–3 problems)'},
-    {id:'s13', time:'5:45–7:00', task:'Gym'},
-    {id:'s14', time:'7:15–8:00', task:'Dinner'},
-    {id:'s15', time:'8:00–9:30', task:'GATE Revision + MCQs', bold:true},
-    {id:'s16', time:'9:30–10:00', task:'Plan tomorrow + Flashcards'},
-    {id:'s17', time:'10:30 PM', task:'Sleep'},
-  ];
-  const DEFAULT_TARGETS = [
-    {id:'t1', ic:'🎥', lb:'2–3 hrs GATE lectures'},
-    {id:'t2', ic:'📖', lb:'3–4 hrs GATE practice & revision'},
-    {id:'t3', ic:'💻', lb:'2 hrs Java / DSA'},
-    {id:'t4', ic:'🧩', lb:'2–3 LeetCode problems'},
-    {id:'t5', ic:'🏋️', lb:'1–1.25 hrs gym'},
-    {id:'t6', ic:'😴', lb:'7.5–8 hrs sleep'},
-  ];
+  const DEFAULT_SCHEDULE = [];
+  const DEFAULT_TARGETS = [];
   const MONTHS = [
     {id:1, name:'Month 1', topics:['Engineering Mathematics','Digital Logic','C Programming','Java Basics','Arrays, Strings'], leetcode:30},
     {id:2, name:'Month 2', topics:['Computer Organization','Discrete Mathematics','Linked List','Stack','Queue'], leetcode:40},
@@ -594,6 +574,10 @@
     addWrap.style.display = editMode ? 'block' : 'none';
 
     if(!editMode){
+      if(state.scheduleItems.length === 0){
+        list.innerHTML = `<div class="empty-hint">No tasks yet. Tap <strong>Edit</strong> to build your own daily schedule.</div>`;
+        return;
+      }
       state.scheduleItems.forEach(item=>{
         const checked = !!state.day.schedule[item.id];
         const row = document.createElement('div');
@@ -656,6 +640,10 @@
     addWrap.style.display = targetsEditMode ? 'block' : 'none';
 
     if(!targetsEditMode){
+      if(state.targetsItems.length === 0){
+        list.innerHTML = `<div class="empty-hint">No targets yet. Tap <strong>Edit</strong> to add your own.</div>`;
+        return;
+      }
       state.targetsItems.forEach(t=>{
         const checked = !!state.day.targets[t.id];
         const chip = document.createElement('div');
