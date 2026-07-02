@@ -270,6 +270,8 @@
   #saveNoteBtn:hover{border-color:var(--amber);color:var(--amber);}
 
 
+  .roadmap-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .roadmap-head .t{font-family:'Fraunces',serif;font-weight:600;font-size:17px;}
   .month-card{margin-bottom:18px;}
   .month-topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);}
   .month-topbar .name{font-family:'Fraunces',serif;font-weight:600;font-size:17px;}
@@ -283,6 +285,12 @@
   .topic-row:hover{background:var(--surface-2);}
   .topic-row.checked .lb{color:var(--text-dim);text-decoration:line-through;}
   .topic-row .lb{color:var(--text);}
+  .topic-row-edit{display:flex;align-items:center;gap:8px;}
+  .topic-row-edit input[type="text"]{
+    flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'Inter',sans-serif;font-size:13.5px;padding:8px 10px;
+  }
+  .topic-row-edit input:focus{outline:none;border-color:var(--amber);}
   .lc-box{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:14px;}
   .lc-box .lc-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;}
   .lc-controls{display:flex;align-items:center;gap:10px;}
@@ -293,6 +301,23 @@
   .lc-controls button:hover{border-color:var(--amber);color:var(--amber);}
   .lc-controls .lc-num{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;flex:1;text-align:center;}
   .lc-target{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:8px;text-align:center;}
+  .lc-target-input{
+    width:100%;margin-top:8px;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;text-align:center;padding:6px;
+  }
+  .lc-target-input:focus{outline:none;border-color:var(--amber);}
+  .lc-label-input{
+    width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'Inter',sans-serif;font-size:12.5px;padding:7px 9px;margin-bottom:10px;
+  }
+  .lc-label-input:focus{outline:none;border-color:var(--amber);}
+  .lc-num-input{
+    background:var(--surface-3);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;text-align:center;padding:7px 4px;
+    width:100%;flex:1;
+  }
+  .lc-num-input:focus{outline:none;border-color:var(--amber);}
+  .lc-of{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);flex-shrink:0;}
 
   /* ---------- method tab ---------- */
   .method-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
@@ -300,6 +325,53 @@
   .method-card{padding:20px;}
   .method-card h3{font-family:'Fraunces',serif;font-size:16px;margin:0 0 4px;}
   .method-card .cap{color:var(--text-dim);font-size:12px;font-family:'JetBrains Mono',monospace;margin-bottom:14px;}
+  .title-edit-input{
+    width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'Fraunces',serif;font-size:15px;padding:7px 10px;
+  }
+  .title-edit-input:focus{outline:none;border-color:var(--amber);}
+  .cap-edit-input{
+    width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:6px 10px;margin-top:4px;
+  }
+  .cap-edit-input:focus{outline:none;border-color:var(--amber);}
+  .strategy-add{margin-top:8px;}
+  .step-edit-row{display:flex;align-items:center;gap:8px;padding:6px 0;}
+  .step-edit-row input{
+    flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'Inter',sans-serif;font-size:13px;padding:7px 9px;
+  }
+  .step-edit-row input:focus{outline:none;border-color:var(--amber);}
+  .revise-pill-edit{
+    flex:1;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:8px;padding:8px;
+    display:flex;flex-direction:column;gap:6px;position:relative;
+  }
+  .revise-pill-edit input{
+    background:var(--surface-3);border:1px solid var(--border);border-radius:6px;color:var(--text);
+    font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 6px;text-align:center;width:100%;
+  }
+  .revise-pill-edit input:focus{outline:none;border-color:var(--amber);}
+  .revise-pill-edit .del-row{position:absolute;top:-8px;right:-8px;width:20px;height:20px;font-size:10px;background:var(--surface);}
+  .java-seg-edit{display:flex;align-items:center;gap:8px;padding:5px 0;}
+  .java-seg-edit input[type="text"]{
+    flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'Inter',sans-serif;font-size:12.5px;padding:7px 9px;
+  }
+  .java-seg-edit input[type="number"]{
+    width:56px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 6px;text-align:center;
+  }
+  .java-seg-edit input:focus{outline:none;border-color:var(--amber);}
+  .prog-chip-edit{
+    display:inline-flex;align-items:center;gap:5px;background:var(--surface-2);border:1px solid var(--border-soft);
+    border-radius:20px;padding:4px 6px 4px 10px;
+  }
+  .prog-chip-edit input{
+    background:transparent;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    width:90px;padding:2px;
+  }
+  .prog-chip-edit input:focus{outline:none;}
+  .prog-chip-edit .del-row{width:18px;height:18px;font-size:9px;border-radius:50%;}
   .steps{list-style:none;margin:0;padding:0;counter-reset:step;}
   .steps li{
     counter-increment:step;padding:9px 0 9px 32px;position:relative;
@@ -381,7 +453,7 @@
     <button class="tab-btn active" data-tab="today">Today</button>
     <button class="tab-btn" data-tab="calendar">Calendar</button>
     <button class="tab-btn" data-tab="roadmap">5-Month Roadmap</button>
-    <button class="tab-btn" data-tab="method">Method</button>
+    <button class="tab-btn" data-tab="strategy">Strategy</button>
   </div>
 
   <!-- TODAY -->
@@ -448,41 +520,40 @@
 
   <!-- ROADMAP -->
   <section class="panel" id="panel-roadmap">
+    <div class="roadmap-head">
+      <div class="t">5-Month Roadmap</div>
+      <button class="edit-toggle" id="editRoadmapBtn">Edit</button>
+    </div>
     <div id="monthsWrap"></div>
   </section>
 
   <!-- METHOD -->
-  <section class="panel" id="panel-method">
+  <section class="panel" id="panel-strategy">
+    <div class="roadmap-head">
+      <div class="t">Strategy</div>
+      <button class="edit-toggle" id="editStrategyBtn">Edit</button>
+    </div>
     <div class="method-grid">
       <div class="card method-card">
-        <h3>GATE Study Strategy</h3>
-        <div class="cap">For every topic, in order</div>
-        <ol class="steps">
-          <li>Watch lecture</li>
-          <li>Make short notes</li>
-          <li>Solve class questions</li>
-          <li>Solve PYQs</li>
-          <li>Solve topic-wise MCQs</li>
-        </ol>
-        <div class="revise-row">
-          <div class="revise-pill"><div class="d">1d</div><div class="l">Revise</div></div>
-          <div class="revise-pill"><div class="d">7d</div><div class="l">Revise</div></div>
-          <div class="revise-pill"><div class="d">30d</div><div class="l">Revise</div></div>
-        </div>
+        <h3 id="card1Title">Strategy</h3>
+        <div class="cap" id="card1Cap">For every topic, in order</div>
+        <ol class="steps" id="strategySteps"></ol>
+        <button class="add-row-btn strategy-add" id="addStepBtn" style="display:none;">+ Add step</button>
+        <div class="revise-row" id="reviseRow"></div>
+        <button class="add-row-btn strategy-add" id="addReviseBtn" style="display:none;">+ Add revision point</button>
       </div>
       <div class="card method-card">
-        <h3>Java Practice</h3>
-        <div class="cap">Daily · 2 hours total</div>
-        <div class="java-split">
-          <div class="java-seg"><div class="lb">Java concepts</div><div class="bar"><i style="width:25%"></i></div><div class="mn">30m</div></div>
-          <div class="java-seg"><div class="lb">DSA implementation</div><div class="bar"><i style="width:25%"></i></div><div class="mn">30m</div></div>
-          <div class="java-seg"><div class="lb">LeetCode</div><div class="bar"><i style="width:50%"></i></div><div class="mn">60m</div></div>
-        </div>
+        <h3 id="card2Title">Practice</h3>
+        <div class="cap" id="card2Cap">Daily practice split</div>
+        <div class="java-split" id="javaSplit"></div>
+        <button class="add-row-btn strategy-add" id="addJavaBtn" style="display:none;">+ Add segment</button>
         <div class="cap" style="margin-top:16px;">Recommended progression</div>
         <div class="prog-chain" id="progChain"></div>
+        <button class="add-row-btn strategy-add" id="addProgBtn" style="display:none;">+ Add topic</button>
       </div>
     </div>
   </section>
+
 
 </div>
 
@@ -498,12 +569,15 @@
   const DEFAULT_SCHEDULE = [];
   const DEFAULT_TARGETS = [];
   const MONTHS = [
-    {id:1, name:'Month 1', topics:['Engineering Mathematics','Digital Logic','C Programming','Java Basics','Arrays, Strings'], leetcode:30},
-    {id:2, name:'Month 2', topics:['Computer Organization','Discrete Mathematics','Linked List','Stack','Queue'], leetcode:40},
-    {id:3, name:'Month 3', topics:['Operating Systems','Data Structures','Trees','BST','Heap'], leetcode:50},
-    {id:5, name:'Month 5', topics:['Algorithms','Compiler','TOC','Dynamic Programming','Greedy'], leetcode:60},
+    {id:1, name:'Month 1', leetcode:0},
+    {id:2, name:'Month 2', leetcode:0},
+    {id:3, name:'Month 3', leetcode:0},
+    {id:5, name:'Month 5', leetcode:0},
   ];
-  const PROGRESSION = ['Arrays','Strings','Linked List','Stack','Queue','Trees','Graphs','Recursion','Backtracking','Dynamic Programming'];
+  const DEFAULT_STRATEGY_STEPS = [];
+  const DEFAULT_REVISE = [];
+  const DEFAULT_JAVA_SPLIT = [];
+  const DEFAULT_PROGRESSION = [];
 
   const DAY_LABELS = ['Mon','Tue','Wed','Thu','Fri','Sat'];
 
@@ -526,11 +600,24 @@
     scheduleItems: DEFAULT_SCHEDULE.map(s=>({...s})),
     targetsItems: DEFAULT_TARGETS.map(t=>({...t}))
   };
-  MONTHS.forEach(m=>{ state.months[m.id] = { topics: m.topics.map(()=>false), leetcodeDone:0 }; });
+  MONTHS.forEach(m=>{ state.months[m.id] = { topics: [], leetcodeLabel:'LeetCode Progress', leetcodeTarget: m.leetcode, leetcodeDone:0 }; });
   let editMode = false;
   let targetsEditMode = false;
+  let roadmapEditMode = false;
+  let strategyEditMode = false;
   let idCounter = 100;
   function genId(){ idCounter += 1; return 'c'+Date.now()+idCounter; }
+
+  state.strategy = {
+    card1Title: 'Strategy',
+    card1Cap: 'For every topic, in order',
+    card2Title: 'Practice',
+    card2Cap: 'Daily practice split',
+    steps: DEFAULT_STRATEGY_STEPS.map(label=>({id:genId(), label})),
+    revise: DEFAULT_REVISE.map(r=>({id:genId(), d:r.d, l:r.l})),
+    javaSplit: DEFAULT_JAVA_SPLIT.map(j=>({id:genId(), lb:j.lb, min:j.min})),
+    progression: DEFAULT_PROGRESSION.map(label=>({id:genId(), label}))
+  };
 
   const LS_PREFIX = 'studyconsole:';
   async function safeGet(key, shared){
@@ -553,9 +640,9 @@
   }
   function monthCompletion(m){
     const st = state.months[m.id];
-    const topicsDone = st.topics.filter(Boolean).length;
-    const topicsRatio = m.topics.length ? topicsDone/m.topics.length : 0;
-    const lcRatio = Math.min(1, st.leetcodeDone / m.leetcode);
+    const topicsDone = st.topics.filter(t=>t.checked).length;
+    const topicsRatio = st.topics.length ? topicsDone/st.topics.length : 0;
+    const lcRatio = st.leetcodeTarget ? Math.min(1, st.leetcodeDone / st.leetcodeTarget) : 0;
     return Math.round((topicsRatio*0.6 + lcRatio*0.4)*100);
   }
   function overallMonthsPct(){
@@ -692,53 +779,118 @@
   // ---------- RENDER: months ----------
   function renderMonths(){
     const wrap = document.getElementById('monthsWrap');
+    const editBtn = document.getElementById('editRoadmapBtn');
+    editBtn.textContent = roadmapEditMode ? 'Done' : 'Edit';
+    editBtn.classList.toggle('active', roadmapEditMode);
     wrap.innerHTML = '';
+
     MONTHS.forEach(m=>{
       const st = state.months[m.id];
       const pct = monthCompletion(m);
       const card = document.createElement('div');
       card.className = 'card month-card';
+
+      const lcInner = roadmapEditMode
+        ? `
+          <input type="text" class="lc-label-input" value="${escapeAttr(st.leetcodeLabel)}" data-act="label" placeholder="Counter name">
+          <div class="lc-controls">
+            <input type="number" class="lc-num-input" min="0" value="${st.leetcodeDone}" data-act="done">
+            <span class="lc-of">of</span>
+            <input type="number" class="lc-num-input" min="0" value="${st.leetcodeTarget}" data-act="target">
+          </div>
+        `
+        : `
+          <div class="lc-lbl">${escapeAttr(st.leetcodeLabel)}</div>
+          <div class="lc-controls">
+            <button data-act="dec">−</button>
+            <div class="lc-num">${st.leetcodeDone}</div>
+            <button data-act="inc">+</button>
+          </div>
+          <div class="lc-target">of ${st.leetcodeTarget} problems</div>
+        `;
+
       card.innerHTML = `
         <div class="month-topbar"><div class="name">${m.name}</div><div class="pct">${pct}%</div></div>
         <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
         <div class="month-body">
           <div class="topic-list" data-mid="${m.id}"></div>
           <div class="lc-box" data-mid-lc="${m.id}">
-            <div class="lc-lbl">LeetCode Progress</div>
-            <div class="lc-controls">
-              <button data-act="dec">−</button>
-              <div class="lc-num">${st.leetcodeDone}</div>
-              <button data-act="inc">+</button>
-            </div>
-            <div class="lc-target">of ${m.leetcode} problems</div>
+            ${lcInner}
           </div>
         </div>
       `;
       wrap.appendChild(card);
 
       const topicList = card.querySelector('.topic-list');
-      m.topics.forEach((topic, i)=>{
-        const row = document.createElement('div');
-        row.className = 'topic-row' + (st.topics[i] ? ' checked':'');
-        row.innerHTML = `<div class="chk">${st.topics[i]?'✓':''}</div><div class="lb">${topic}</div>`;
-        row.addEventListener('click', ()=>{
-          st.topics[i] = !st.topics[i];
-          renderMonths();
-          renderHeaderStats();
-          markUnsaved();
+
+      if(!roadmapEditMode){
+        if(st.topics.length === 0){
+          topicList.innerHTML = `<div class="empty-hint" style="padding:10px 0;text-align:left;">No topics yet. Tap <strong>Edit</strong> above to add some.</div>`;
+        } else {
+          st.topics.forEach(topic=>{
+            const row = document.createElement('div');
+            row.className = 'topic-row' + (topic.checked ? ' checked':'');
+            row.innerHTML = `<div class="chk">${topic.checked?'✓':''}</div><div class="lb">${topic.label}</div>`;
+            row.addEventListener('click', ()=>{
+              topic.checked = !topic.checked;
+              renderMonths();
+              renderHeaderStats();
+              markUnsaved();
+            });
+            topicList.appendChild(row);
+          });
+        }
+      } else {
+        st.topics.forEach(topic=>{
+          const row = document.createElement('div');
+          row.className = 'topic-row-edit';
+          row.innerHTML = `
+            <input type="text" value="${escapeAttr(topic.label)}" placeholder="Topic">
+            <div class="del-row" title="Remove">✕</div>
+          `;
+          row.querySelector('input').addEventListener('input', e=>{
+            topic.label = e.target.value; markUnsaved();
+          });
+          row.querySelector('.del-row').addEventListener('click', ()=>{
+            st.topics = st.topics.filter(t=>t.id !== topic.id);
+            renderMonths(); renderHeaderStats(); markUnsaved();
+          });
+          topicList.appendChild(row);
         });
-        topicList.appendChild(row);
-      });
+        const addBtn = document.createElement('button');
+        addBtn.className = 'add-row-btn';
+        addBtn.style.marginTop = '4px';
+        addBtn.textContent = '+ Add topic';
+        addBtn.addEventListener('click', ()=>{
+          st.topics.push({id:genId(), label:'', checked:false});
+          renderMonths(); markUnsaved();
+        });
+        topicList.appendChild(addBtn);
+      }
 
       const lcBox = card.querySelector('.lc-box');
-      lcBox.querySelector('[data-act="inc"]').addEventListener('click', ()=>{
-        st.leetcodeDone = Math.min(m.leetcode, st.leetcodeDone+1);
-        renderMonths(); renderHeaderStats(); markUnsaved();
-      });
-      lcBox.querySelector('[data-act="dec"]').addEventListener('click', ()=>{
-        st.leetcodeDone = Math.max(0, st.leetcodeDone-1);
-        renderMonths(); renderHeaderStats(); markUnsaved();
-      });
+      if(!roadmapEditMode){
+        lcBox.querySelector('[data-act="inc"]').addEventListener('click', ()=>{
+          st.leetcodeDone = Math.min(st.leetcodeTarget || Infinity, st.leetcodeDone+1);
+          renderMonths(); renderHeaderStats(); markUnsaved();
+        });
+        lcBox.querySelector('[data-act="dec"]').addEventListener('click', ()=>{
+          st.leetcodeDone = Math.max(0, st.leetcodeDone-1);
+          renderMonths(); renderHeaderStats(); markUnsaved();
+        });
+      } else {
+        lcBox.querySelector('[data-act="label"]').addEventListener('input', e=>{
+          st.leetcodeLabel = e.target.value; markUnsaved();
+        });
+        lcBox.querySelector('[data-act="done"]').addEventListener('input', e=>{
+          st.leetcodeDone = Math.max(0, parseInt(e.target.value,10) || 0);
+          renderHeaderStats(); markUnsaved();
+        });
+        lcBox.querySelector('[data-act="target"]').addEventListener('input', e=>{
+          st.leetcodeTarget = Math.max(0, parseInt(e.target.value,10) || 0);
+          markUnsaved();
+        });
+      }
     });
   }
 
@@ -746,9 +898,153 @@
     document.getElementById('roStreak').textContent = state.stats.streak;
   }
 
-  function renderProgChain(){
-    const wrap = document.getElementById('progChain');
-    wrap.innerHTML = PROGRESSION.map(p=>`<span class="prog-chip">${p}</span>`).join('');
+  function renderStrategy(){
+    const editBtn = document.getElementById('editStrategyBtn');
+    editBtn.textContent = strategyEditMode ? 'Done' : 'Edit';
+    editBtn.classList.toggle('active', strategyEditMode);
+    document.querySelectorAll('.strategy-add').forEach(b=> b.style.display = strategyEditMode ? 'block' : 'none');
+
+    const st = state.strategy;
+
+    // ---- card titles / captions ----
+    function renderTitleCap(titleElId, capElId, titleKey, capKey){
+      const titleEl = document.getElementById(titleElId);
+      const capEl = document.getElementById(capElId);
+      if(!strategyEditMode){
+        titleEl.textContent = st[titleKey];
+        capEl.textContent = st[capKey];
+      } else {
+        titleEl.innerHTML = `<input type="text" class="title-edit-input" value="${escapeAttr(st[titleKey])}" placeholder="Card title">`;
+        titleEl.querySelector('input').addEventListener('input', e=>{ st[titleKey] = e.target.value; markUnsaved(); });
+        capEl.innerHTML = `<input type="text" class="cap-edit-input" value="${escapeAttr(st[capKey])}" placeholder="Subtitle">`;
+        capEl.querySelector('input').addEventListener('input', e=>{ st[capKey] = e.target.value; markUnsaved(); });
+      }
+    }
+    renderTitleCap('card1Title','card1Cap','card1Title','card1Cap');
+    renderTitleCap('card2Title','card2Cap','card2Title','card2Cap');
+
+    // ---- steps ----
+    const stepsEl = document.getElementById('strategySteps');
+    stepsEl.innerHTML = '';
+    if(!strategyEditMode){
+      if(st.steps.length === 0){
+        stepsEl.innerHTML = `<div class="empty-hint" style="padding:10px 0;text-align:left;">No steps yet. Tap <strong>Edit</strong> above to add your own routine — e.g. Brush teeth, Drink water, Stretch, Read for 10 minutes.</div>`;
+      } else {
+        st.steps.forEach(s=>{
+          const li = document.createElement('li');
+          li.textContent = s.label;
+          stepsEl.appendChild(li);
+        });
+      }
+    } else {
+      st.steps.forEach(s=>{
+        const row = document.createElement('div');
+        row.className = 'step-edit-row';
+        row.innerHTML = `<input type="text" value="${escapeAttr(s.label)}" placeholder="e.g. Brush teeth"><div class="del-row" title="Remove">✕</div>`;
+        row.querySelector('input').addEventListener('input', e=>{ s.label = e.target.value; markUnsaved(); });
+        row.querySelector('.del-row').addEventListener('click', ()=>{
+          st.steps = st.steps.filter(x=>x.id!==s.id);
+          renderStrategy(); markUnsaved();
+        });
+        stepsEl.appendChild(row);
+      });
+    }
+
+    // ---- revision pills ----
+    const reviseEl = document.getElementById('reviseRow');
+    reviseEl.innerHTML = '';
+    if(!strategyEditMode){
+      if(st.revise.length === 0){
+        reviseEl.innerHTML = `<div class="empty-hint" style="padding:10px 0;text-align:left;">No revision points yet. Tap <strong>Edit</strong> above to add some — e.g. 1 day, 1 week, 1 month.</div>`;
+      } else {
+        st.revise.forEach(r=>{
+          const pill = document.createElement('div');
+          pill.className = 'revise-pill';
+          pill.innerHTML = `<div class="d">${r.d}</div><div class="l">${r.l}</div>`;
+          reviseEl.appendChild(pill);
+        });
+      }
+    } else {
+      st.revise.forEach(r=>{
+        const pill = document.createElement('div');
+        pill.className = 'revise-pill-edit';
+        pill.innerHTML = `
+          <div class="del-row" title="Remove">✕</div>
+          <input type="text" value="${escapeAttr(r.d)}" data-f="d" placeholder="e.g. 1d">
+          <input type="text" value="${escapeAttr(r.l)}" data-f="l" placeholder="e.g. Revise">
+        `;
+        pill.querySelector('[data-f="d"]').addEventListener('input', e=>{ r.d = e.target.value; markUnsaved(); });
+        pill.querySelector('[data-f="l"]').addEventListener('input', e=>{ r.l = e.target.value; markUnsaved(); });
+        pill.querySelector('.del-row').addEventListener('click', ()=>{
+          st.revise = st.revise.filter(x=>x.id!==r.id);
+          renderStrategy(); markUnsaved();
+        });
+        reviseEl.appendChild(pill);
+      });
+    }
+
+    // ---- java split ----
+    const javaEl = document.getElementById('javaSplit');
+    javaEl.innerHTML = '';
+    const totalMin = st.javaSplit.reduce((a,b)=>a+(b.min||0),0) || 1;
+    if(!strategyEditMode){
+      if(st.javaSplit.length === 0){
+        javaEl.innerHTML = `<div class="empty-hint" style="padding:10px 0;text-align:left;">No segments yet. Tap <strong>Edit</strong> above to add some — e.g. Morning walk 30m, Reading 20m, Gym 45m.</div>`;
+      } else {
+        st.javaSplit.forEach(j=>{
+          const seg = document.createElement('div');
+          seg.className = 'java-seg';
+          const pct = Math.round((j.min/totalMin)*100);
+          seg.innerHTML = `<div class="lb">${j.lb}</div><div class="bar"><i style="width:${pct}%"></i></div><div class="mn">${j.min}m</div>`;
+          javaEl.appendChild(seg);
+        });
+      }
+    } else {
+      st.javaSplit.forEach(j=>{
+        const seg = document.createElement('div');
+        seg.className = 'java-seg-edit';
+        seg.innerHTML = `
+          <input type="text" value="${escapeAttr(j.lb)}" data-f="lb" placeholder="e.g. Morning walk">
+          <input type="number" min="0" value="${j.min}" data-f="min">
+          <div class="del-row" title="Remove">✕</div>
+        `;
+        seg.querySelector('[data-f="lb"]').addEventListener('input', e=>{ j.lb = e.target.value; markUnsaved(); });
+        seg.querySelector('[data-f="min"]').addEventListener('input', e=>{ j.min = Math.max(0, parseInt(e.target.value,10)||0); markUnsaved(); });
+        seg.querySelector('.del-row').addEventListener('click', ()=>{
+          st.javaSplit = st.javaSplit.filter(x=>x.id!==j.id);
+          renderStrategy(); markUnsaved();
+        });
+        javaEl.appendChild(seg);
+      });
+    }
+
+    // ---- progression chips ----
+    const progEl = document.getElementById('progChain');
+    progEl.innerHTML = '';
+    if(!strategyEditMode){
+      if(st.progression.length === 0){
+        progEl.innerHTML = `<div class="empty-hint" style="padding:6px 0;text-align:left;">No items yet. Tap <strong>Edit</strong> above to add some — e.g. Wake up, Skincare, Journaling.</div>`;
+      } else {
+        st.progression.forEach(p=>{
+          const chip = document.createElement('span');
+          chip.className = 'prog-chip';
+          chip.textContent = p.label;
+          progEl.appendChild(chip);
+        });
+      }
+    } else {
+      st.progression.forEach(p=>{
+        const chip = document.createElement('span');
+        chip.className = 'prog-chip-edit';
+        chip.innerHTML = `<input type="text" value="${escapeAttr(p.label)}" placeholder="e.g. Journaling"><div class="del-row" title="Remove">✕</div>`;
+        chip.querySelector('input').addEventListener('input', e=>{ p.label = e.target.value; markUnsaved(); });
+        chip.querySelector('.del-row').addEventListener('click', ()=>{
+          st.progression = st.progression.filter(x=>x.id!==p.id);
+          renderStrategy(); markUnsaved();
+        });
+        progEl.appendChild(chip);
+      });
+    }
   }
 
   // ---------- week strip ----------
@@ -973,7 +1269,16 @@
       try{
         const parsed = JSON.parse(monthsRaw);
         MONTHS.forEach(m=>{
-          if(parsed[m.id]) state.months[m.id] = parsed[m.id];
+          const p = parsed[m.id];
+          const topicsOk = p && Array.isArray(p.topics) && (p.topics.length===0 || (typeof p.topics[0]==='object' && 'label' in p.topics[0]));
+          if(p && topicsOk){
+            state.months[m.id] = {
+              topics: p.topics,
+              leetcodeLabel: typeof p.leetcodeLabel==='string' ? p.leetcodeLabel : 'LeetCode Progress',
+              leetcodeTarget: typeof p.leetcodeTarget==='number' ? p.leetcodeTarget : m.leetcode,
+              leetcodeDone: typeof p.leetcodeDone==='number' ? p.leetcodeDone : 0
+            };
+          }
         });
       }catch(e){}
     }
@@ -981,13 +1286,28 @@
     if(statsRaw){
       try{ state.stats = JSON.parse(statsRaw); }catch(e){}
     }
+    const strategyRaw = await safeGet('strategy', false);
+    if(strategyRaw){
+      try{
+        const parsed = JSON.parse(strategyRaw);
+        if(Array.isArray(parsed.steps) && Array.isArray(parsed.revise) && Array.isArray(parsed.javaSplit) && Array.isArray(parsed.progression)){
+          state.strategy = {
+            card1Title: typeof parsed.card1Title==='string' ? parsed.card1Title : 'Strategy',
+            card1Cap: typeof parsed.card1Cap==='string' ? parsed.card1Cap : 'For every topic, in order',
+            card2Title: typeof parsed.card2Title==='string' ? parsed.card2Title : 'Practice',
+            card2Cap: typeof parsed.card2Cap==='string' ? parsed.card2Cap : 'Daily practice split',
+            steps: parsed.steps, revise: parsed.revise, javaSplit: parsed.javaSplit, progression: parsed.progression
+          };
+        }
+      }catch(e){}
+    }
 
     renderSchedule();
     renderTargets();
     renderTodayStats();
     renderMonths();
     renderHeaderStats();
-    renderProgChain();
+    renderStrategy();
     await renderWeekStrip();
     await renderCalendar();
     await selectCalDate(todayStr());
@@ -1023,6 +1343,7 @@
     const ok3 = await safeSet('stats', JSON.stringify(state.stats), false);
     const ok4 = await safeSet('scheduleItems', JSON.stringify(state.scheduleItems), false);
     const ok5 = await safeSet('targetsItems', JSON.stringify(state.targetsItems), false);
+    const ok6 = await safeSet('strategy', JSON.stringify(state.strategy), false);
 
     renderHeaderStats();
     await renderWeekStrip();
@@ -1031,7 +1352,7 @@
     if(selectedDate === tstr) renderDayDetail();
 
     btn.disabled = false;
-    if(ok1 && ok2 && ok3 && ok4 && ok5){
+    if(ok1 && ok2 && ok3 && ok4 && ok5 && ok6){
       s.textContent = 'Saved just now ✓';
       s.classList.add('ok');
     } else {
@@ -1059,6 +1380,32 @@
     state.targetsItems.push({id:genId(), ic:'🎯', lb:''});
     renderTargets();
     markUnsaved();
+  });
+
+  document.getElementById('editRoadmapBtn').addEventListener('click', ()=>{
+    roadmapEditMode = !roadmapEditMode;
+    renderMonths();
+  });
+
+  document.getElementById('editStrategyBtn').addEventListener('click', ()=>{
+    strategyEditMode = !strategyEditMode;
+    renderStrategy();
+  });
+  document.getElementById('addStepBtn').addEventListener('click', ()=>{
+    state.strategy.steps.push({id:genId(), label:''});
+    renderStrategy(); markUnsaved();
+  });
+  document.getElementById('addReviseBtn').addEventListener('click', ()=>{
+    state.strategy.revise.push({id:genId(), d:'', l:''});
+    renderStrategy(); markUnsaved();
+  });
+  document.getElementById('addJavaBtn').addEventListener('click', ()=>{
+    state.strategy.javaSplit.push({id:genId(), lb:'', min:0});
+    renderStrategy(); markUnsaved();
+  });
+  document.getElementById('addProgBtn').addEventListener('click', ()=>{
+    state.strategy.progression.push({id:genId(), label:''});
+    renderStrategy(); markUnsaved();
   });
 
   document.querySelectorAll('.tab-btn').forEach(btn=>{
