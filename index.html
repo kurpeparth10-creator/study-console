@@ -847,6 +847,21 @@
   // ---- Full-screen alarm modal ---------------------------------------
   let activeAlarmItem = null; // {item, rem} currently shown in the modal
   const alarmQueue = [];
+  let alarmLoopId = null;
+  let alarmAutoStopId = null;
+
+  function startAlarmLoop(sound){
+    stopAlarmLoop();
+    playSound(sound); // play immediately
+    alarmLoopId = setInterval(()=> playSound(sound), 1800); // repeat every 1.8s
+    // Safety timeout: if nobody interacts within 2 minutes, don't ring
+    // forever — automatically snooze 5 minutes and ring again later.
+    alarmAutoStopId = setTimeout(()=>{ performSnooze(5); }, 120000);
+  }
+  function stopAlarmLoop(){
+    if(alarmLoopId){ clearInterval(alarmLoopId); alarmLoopId = null; }
+    if(alarmAutoStopId){ clearTimeout(alarmAutoStopId); alarmAutoStopId = null; }
+  }
 
   function fireReminder(item){
     alarmQueue.push(item);
@@ -862,13 +877,29 @@
     document.getElementById('alarmTimeText').textContent = fmtTime12(rem.time) + (item.time ? ` · ${item.task}` : '');
     document.getElementById('alarmOverlay').classList.add('show');
 
-    playSound(rem.sound || 'classic');
+    startAlarmLoop(rem.sound || 'classic');
     showBrowserNotification(rem.label || item.task || 'Study Console reminder', 'Tap to open your task.');
   }
   function closeAlarmModal(){
+    stopAlarmLoop();
     document.getElementById('alarmOverlay').classList.remove('show');
     activeAlarmItem = null;
     setTimeout(showNextAlarm, 250);
+  }
+
+  function performSnooze(minutes){
+    if(activeAlarmItem){
+      const rem = activeAlarmItem.reminder;
+      const snoozed = new Date(Date.now() + minutes*60000);
+      rem.date = fmtDate(snoozed);
+      rem.time = pad(snoozed.getHours())+':'+pad(snoozed.getMinutes());
+      rem.repeat = 'none';
+      rem.enabled = true;
+      rem.lastFiredKey = null;
+      if(rem.serverId) snoozeReminderOnBackend(rem.serverId, minutes);
+      renderSchedule(); markUnsaved();
+    }
+    closeAlarmModal();
   }
 
   document.getElementById('alarmComplete').addEventListener('click', ()=>{
@@ -882,21 +913,7 @@
     closeAlarmModal();
   });
   document.querySelectorAll('.alarm-btn.snooze').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      if(activeAlarmItem){
-        const mins = parseInt(btn.dataset.min,10);
-        const rem = activeAlarmItem.reminder;
-        const snoozed = new Date(Date.now() + mins*60000);
-        rem.date = fmtDate(snoozed);
-        rem.time = pad(snoozed.getHours())+':'+pad(snoozed.getMinutes());
-        rem.repeat = 'none';
-        rem.enabled = true;
-        rem.lastFiredKey = null;
-        if(rem.serverId) snoozeReminderOnBackend(rem.serverId, mins);
-        renderSchedule(); markUnsaved();
-      }
-      closeAlarmModal();
-    });
+    btn.addEventListener('click', ()=> performSnooze(parseInt(btn.dataset.min,10)));
   });
   document.getElementById('alarmDismiss').addEventListener('click', ()=>{
     if(activeAlarmItem){
