@@ -985,13 +985,26 @@
       };
       if(rem.serverId){
         const updated = await apiCall('/api/reminders/'+rem.serverId, { method:'PUT', body: JSON.stringify(payload) });
-        if(updated) synced++;
+        if(updated){
+          synced++;
+        } else {
+          // The server-side reminder is gone (e.g. a backend redeploy reset
+          // its storage) — self-heal by creating a fresh one instead of
+          // failing forever on a dead id.
+          console.log('[sync] stale serverId', rem.serverId, '— recreating on backend');
+          rem.serverId = null;
+          const created = await apiCall('/api/reminders', { method:'POST', body: JSON.stringify(payload) });
+          if(created && created.id){ rem.serverId = created.id; synced++; }
+        }
       } else {
         const created = await apiCall('/api/reminders', { method:'POST', body: JSON.stringify(payload) });
         if(created && created.id){ rem.serverId = created.id; synced++; }
       }
     }
     console.log(`[sync] done — ${synced} reminder(s) synced`);
+    // serverId may have changed (self-heal) — persist that locally too,
+    // without disturbing the "Saved just now" status already shown.
+    await safeSet('scheduleItems', JSON.stringify(state.scheduleItems), false);
   }
   async function deleteReminderFromBackend(serverId){
     await apiCall('/api/reminders/'+serverId, { method:'DELETE' });
