@@ -771,23 +771,40 @@
   }
   function nowTimeKey(){ const d=new Date(); return pad(d.getHours())+':'+pad(d.getMinutes()); }
 
+  const REMINDER_GRACE_MS = 15 * 60 * 1000; // mirrors backend/reminderLogic.js
+
   // ---- Reminder fire-rule (mirrors backend/reminderLogic.js) --------
   function reminderShouldFireNow(rem, now){
     if(!rem || !rem.enabled || !rem.time) return false;
     const todayKey = todayStr();
     if(rem.lastFiredKey === todayKey) return false;
-    if(nowTimeKey() !== rem.time) return false;
+
+    let refDateKey;
     switch(rem.repeat){
-      case 'daily': return true;
+      case 'daily':
+        refDateKey = todayKey;
+        break;
       case 'weekly': {
         if(!rem.date) return false;
         const start = new Date(rem.date+'T00:00:00');
-        return start.getDay() === now.getDay();
+        if(start.getDay() !== now.getDay()) return false;
+        refDateKey = todayKey;
+        break;
       }
-      case 'custom': return (rem.customDays||[]).includes(now.getDay());
+      case 'custom': {
+        if(!(rem.customDays||[]).includes(now.getDay())) return false;
+        refDateKey = todayKey;
+        break;
+      }
       case 'none':
-      default: return rem.date === todayKey;
+      default:
+        if(rem.date !== todayKey) return false;
+        refDateKey = todayKey;
     }
+
+    const target = new Date(`${refDateKey}T${rem.time}:00`);
+    const diffMs = now.getTime() - target.getTime();
+    return diffMs >= 0 && diffMs <= REMINDER_GRACE_MS;
   }
 
   // ---- Sound synthesis (Web Audio API — no external audio files needed) ----
