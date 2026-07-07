@@ -653,6 +653,8 @@
   </div>
 </div>
 
+<div id="heartbeatBadge" style="position:fixed;bottom:78px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);padding:5px 12px;border-radius:100px;z-index:9998;">checker: 0 ticks · not started yet</div>
+
 <div class="save-bar">
   <div class="save-inner">
     <div class="save-status" id="saveStatus">Not saved yet</div>
@@ -942,13 +944,32 @@
   // ---- The 30-second in-tab checker -----------------------------------
   function checkReminders(){
     const now = new Date();
+    heartbeatCount++;
+    updateHeartbeatBadge(now);
+    console.log('[check]', now.toLocaleTimeString(), '— tick #'+heartbeatCount, '—', state.scheduleItems.length, 'schedule item(s)');
     state.scheduleItems.forEach(item=>{
-      if(item.reminder && reminderShouldFireNow(item.reminder, now)){
-        fireReminder(item);
-      }
+      const rem = item.reminder;
+      if(!rem) return;
+      if(!rem.enabled){ return; } // skip silently, too noisy to log every disabled item
+      const willFire = reminderShouldFireNow(rem, now);
+      console.log('[check]', JSON.stringify({
+        task: item.task, enabled: rem.enabled, time: rem.time, date: rem.date,
+        repeat: rem.repeat, lastFiredKey: rem.lastFiredKey, willFire
+      }));
+      if(willFire) fireReminder(item);
     });
   }
-  setInterval(checkReminders, 30000);
+
+  let heartbeatCount = 0;
+  function updateHeartbeatBadge(now){
+    const el = document.getElementById('heartbeatBadge');
+    if(el) el.textContent = `checker: ${heartbeatCount} ticks · last ${now.toLocaleTimeString()}`;
+  }
+  const reminderCheckIntervalId = setInterval(checkReminders, 30000);
+
+  // Exposed on window so they're reachable from DevTools console regardless
+  // of any scoping confusion — type e.g. window.SC.checkReminders() directly.
+  window.SC = { checkReminders, state, reminderCheckIntervalId, fireReminder };
 
   // ---- Backend sync (best-effort — silently no-ops if BACKEND_URL unset) ----
   async function apiCall(path, opts){
@@ -981,8 +1002,13 @@
       const payload = {
         deviceId, taskId:item.id, label: rem.label || item.task,
         date: rem.date || null, time: rem.time || null, enabled: !!rem.enabled,
-        repeat: rem.repeat || 'none', customDays: rem.customDays || [], sound: rem.sound || 'classic'
+        repeat: rem.repeat || 'none', customDays: rem.customDays || [], sound: rem.sound || 'classic',
+        lastFiredKey: rem.lastFiredKey || null
       };
+      // Re-enabling a reminder should always clear any prior "completed" state
+      // on the backend too — otherwise a reminder completed once via the
+      // alarm modal could never fire again even after being re-enabled here.
+      if(rem.enabled) payload.completed = false;
       if(rem.serverId){
         const updated = await apiCall('/api/reminders/'+rem.serverId, { method:'PUT', body: JSON.stringify(payload) });
         if(updated){
@@ -1224,13 +1250,19 @@
 
     panel.querySelector('#rp-enabled').addEventListener('change', e=>{
       rem.enabled = e.target.checked;
+      rem.lastFiredKey = null; // re-arm — a freshly (re)enabled reminder should be eligible to fire
       if(rem.enabled) requestNotifyPermission();
       renderSchedule(); markUnsaved();
     });
-    panel.querySelector('#rp-date').addEventListener('input', e=>{ rem.date = e.target.value; markUnsaved(); });
-    panel.querySelector('#rp-time').addEventListener('input', e=>{ rem.time = e.target.value; markUnsaved(); });
+    panel.querySelector('#rp-date').addEventListener('input', e=>{
+      rem.date = e.target.value; rem.lastFiredKey = null; markUnsaved();
+    });
+    panel.querySelector('#rp-time').addEventListener('input', e=>{
+      rem.time = e.target.value; rem.lastFiredKey = null; markUnsaved();
+    });
     panel.querySelector('#rp-repeat').addEventListener('change', e=>{
       rem.repeat = e.target.value;
+      rem.lastFiredKey = null;
       panel.querySelector('#rp-customwrap').style.display = rem.repeat==='custom' ? 'block' : 'none';
       markUnsaved();
     });
@@ -1857,6 +1889,7 @@
     s.textContent = 'Loaded from last save';
 
     setupPushNotifications();
+    checkReminders();
   }
 
   async function saveAll(){
