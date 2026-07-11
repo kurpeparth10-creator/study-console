@@ -1003,7 +1003,8 @@
         deviceId, taskId:item.id, label: rem.label || item.task,
         date: rem.date || null, time: rem.time || null, enabled: !!rem.enabled,
         repeat: rem.repeat || 'none', customDays: rem.customDays || [], sound: rem.sound || 'classic',
-        lastFiredKey: rem.lastFiredKey || null
+        lastFiredKey: rem.lastFiredKey || null,
+        tzOffsetMinutes: new Date().getTimezoneOffset() // e.g. -330 for IST — tells the backend how to interpret date/time as YOUR local wall clock, not server UTC
       };
       // Re-enabling a reminder should always clear any prior "completed" state
       // on the backend too — otherwise a reminder completed once via the
